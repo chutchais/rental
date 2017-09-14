@@ -1,0 +1,5 @@
+*.pyc
+rental/*.pyc
+rental/migrations/*.pyc
+rental/migrations/*.py
+db.sqlite3

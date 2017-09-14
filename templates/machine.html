@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{% endblock head %}
+
+
+{% block form_content %}
+	<H2>Rental Report - {{ name }} <small><a href="{% url 'home' %}"> Home </a></small></H2>
+	<table class="table table-hover" width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+	   <th>Name#</th>
+       <th>Rent from#</th>
+       <th>Total#</th>
+	   <th>Description#</th>
+       <th>Issue Date</th>
+       <th>Machine - Start - Stop - Total time</th>
+	 </tr>
+     {% for obj in objs %}
+		<tr>
+			<td>
+<!--                 {% if obj.tickets %}
+                    <a href="{% url 'machine_details' obj.name %}">{{ obj.name }}</a>
+                {% else %}
+                    {{ obj.name }}
+                {% endif %} -->
+                {{ obj.rental.name }}
+            </td>
+            <td><a href="{% url 'company' obj.rental.rent_from %}">{{ obj.rental.rent_from }}</td>
+            <td>{{ obj.rental.total_machine }}</td>
+			<td>{{ obj.rental.description|linebreaks }}</td>
+			<td>{{ obj.rental.created_date }}</td>
+			<td>
+
+                    <table class="table table-hover">
+                      <!--   <tr>
+                           <th>Machine#</th>
+                           <th>Start Date</th>
+                           <th>Finish Date</th>
+                           <th>Total (Hour)</th>
+                         </tr> -->
+
+                            <tr>
+                                <td> <a href="{% url 'machine' obj.machine %}">{{ obj.machine}} </a></td>
+                                <td> {{ obj.start_date}}</td>
+                                <td> {{ obj.stop_date }}</td>
+                                <td> {{ obj.total_hour }}</td>
+                            </tr>
+
+                    </table>
+ 
+                </td>
+            
+
+		</tr>
+     {% endfor %}
+	</table>
+{% endblock form_content %}
+
