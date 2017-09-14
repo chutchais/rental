@@ -15,3 +15,7 @@ def bymachine(request,machine):
 def bycompany(request,company):
 	obj = RentalDetail.objects.filter(rental__rent_from=company)
 	return render(request, 'machine.html', {'objs': obj,'name':company})
+
+def byrental(request,rental):
+	obj = Rental.objects.filter(name=rental)
+	return render(request, 'index.html', {'objs': obj,'name':rental})

@@ -6,7 +6,12 @@
 
 
 {% block form_content %}
-	<H2>Rental Report</H2>
+	<H2>Rental Report  
+    {% if name %}
+          - {{ name }} <small><a href="{% url 'home' %}"> Home </a></small> 
+    {% endif %}
+   </H2>
+
 	<table class="table table-hover" width="100%" cellpadding="0" cellspacing="0">
 	<tr>
 	   <th>Name#</th>
@@ -24,11 +29,11 @@
                 {% else %}
                     {{ obj.name }}
                 {% endif %} -->
-                {{ obj.name }}
+                <a href="{% url 'rental' obj.name %}">{{ obj.name }}</a>
             </td>
             <td><a href="{% url 'company' obj.rent_from %}">{{ obj.rent_from }}</a></td>
             <td>{{ obj.total_machine }}</td>
-			<td>{{ obj.description }}</td>
+			<td>{{ obj.description|linebreaks }}</td>
 			<td>{{ obj.created_date }}</td>
 			<td>
 
