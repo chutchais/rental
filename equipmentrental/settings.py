@@ -122,6 +122,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 from django.conf.locale.en import formats as en_formats
-en_formats.DATETIME_FORMAT = "M d Y H:i"
-en_formats.DATE_FORMAT = 'M d Y'
+en_formats.DATETIME_FORMAT = "M d,Y"
+en_formats.DATE_FORMAT = 'M d,Y'
 en_formats.TIME_FORMAT = 'H:i'
+# en_formats.DATETIME_FORMAT = "M d,Y H:i"

@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^report/', include('rental.urls')),
 ]
 
-admin.site.site_header = 'Machine Rental System'
-admin.site.site_title = 'Machine Rental System'
+admin.site.site_header = 'Equipment Rental System'
+admin.site.site_title = 'Equipment Rental System'

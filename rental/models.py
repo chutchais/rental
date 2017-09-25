@@ -41,9 +41,8 @@ class Machine(models.Model):
 	def __str__(self):
 		return self.name
 
-class Rental(models.Model):
+class Vessel(models.Model):
 	name = models.CharField(max_length=50,primary_key=True)
-	rent_from = models.CharField(max_length=10 ,choices=COMPANY_CHOICES)
 	description = models.CharField(max_length=255,blank=True, null=True)
 	created_date = models.DateTimeField(auto_now_add=True)
 	modified_date = models.DateTimeField(blank=True, null=True)
@@ -52,36 +51,79 @@ class Rental(models.Model):
 	def __str__(self):
 		return self.name
 
-	def total_machine(self):
-		return self.items.count()
-
-	class Meta:
-		ordering = ['-created_date']
-
-
-class RentalDetail(models.Model):
-	machine = models.ForeignKey('Machine', related_name='rentals')
-	rental = models.ForeignKey('Rental',
-		on_delete = models.CASCADE, related_name='items')
+class Purpose(models.Model):
+	name = models.CharField(max_length=50)
 	description = models.CharField(max_length=255,blank=True, null=True)
-	start_date = models.DateTimeField(blank=True, null=True)
-	stop_date  = models.DateTimeField(blank=True, null=True)
 	created_date = models.DateTimeField(auto_now_add=True)
-	modified_date = models.DateTimeField(blank=True, null=True,auto_now=True)
+	modified_date = models.DateTimeField(blank=True, null=True)
 	user = models.ForeignKey('auth.User',blank=True,null=True)
 
 	def __str__(self):
-		return self.machine.name
+		return self.name
 
-	def total_hour(self):
-		return self.stop_date - self.start_date
 
-	def clean(self):
-		if self.stop_date <= self.start_date :
-			raise ValidationError('Invalid rental date : Stop date must be after Start date')
-	
+class Rental(models.Model):
+	name = models.CharField(max_length=50,primary_key=True)
+	machine = models.ManyToManyField(Machine,related_name="rentals")
+	vessel = models.ForeignKey('Vessel',
+		on_delete = models.CASCADE, related_name='rentals',blank=True, null=True,
+		verbose_name ='For Vessel')
+	# rent_from = models.CharField(verbose_name ='Rent from',max_length=10 ,choices=COMPANY_CHOICES)
+	requested_by = models.CharField(verbose_name ='Requested By',max_length=10 ,choices=COMPANY_CHOICES,blank=True, null=True)
+	description = models.CharField(max_length=255,blank=True, null=True)
+	start_date = models.DateTimeField(blank=True, null=True)
+	stop_date  = models.DateTimeField(blank=True, null=True)
+	purpose = models.ForeignKey('Purpose',
+		on_delete = models.CASCADE, related_name='rentals',blank=True, null=True,verbose_name ='Rent purpose')
+	created_date = models.DateTimeField(verbose_name ='Issued Date',auto_now_add=True)
+	modified_date = models.DateTimeField(blank=True, null=True)
+	approved = models.BooleanField(default=False)
+	approved_date = models.DateTimeField(blank=True, null=True)
+	approved_by = models.ForeignKey('auth.User',related_name="approves",blank=True,null=True)
+	user = models.ForeignKey('auth.User',blank=True,null=True)
+
+	def __str__(self):
+		return self.name
+
+	def total_machine(self):
+		return self.machine.all().count()
+
 	class Meta:
 		ordering = ['-created_date']
+
+# class RentalDetail(models.Model):
+# 	machine = models.ManyToManyField(Machine,related_name="machines") #models.ForeignKey('Machine', related_name='rentals')
+# 	rental = models.ForeignKey('Rental',
+# 		on_delete = models.CASCADE, related_name='items')
+# 	description = models.CharField(max_length=255,blank=True, null=True)
+# 	start_date = models.DateTimeField(blank=True, null=True)
+# 	stop_date  = models.DateTimeField(blank=True, null=True)
+# 	created_date = models.DateTimeField(auto_now_add=True)
+# 	modified_date = models.DateTimeField(blank=True, null=True,auto_now=True)
+# 	user = models.ForeignKey('auth.User',blank=True,null=True)
+
+# 	def __str__(self):
+# 		return self.rental.name
+
+# 	def total_hour(self):
+# 		return self.stop_date - self.start_date
+
+# 	def clean(self):
+# 		if self.stop_date <= self.start_date :
+# 			raise ValidationError('Invalid rental date : Stop date must be after Start date')
+	
+# 	class Meta:
+# 		ordering = ['-created_date']
+
+# class Purpose(models.Model):
+# 	name = models.CharField(max_length=50)
+# 	description = models.CharField(max_length=255,blank=True, null=True)
+# 	created_date = models.DateTimeField(auto_now_add=True)
+# 	modified_date = models.DateTimeField(blank=True, null=True)
+# 	user = models.ForeignKey('auth.User',blank=True,null=True)
+
+# 	def __str__(self):
+# 		return self.name
 
 		# if self.imp_release_date != None :
 		# 	if self.imp_release_date <= self.etb :
