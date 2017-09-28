@@ -1,0 +1,79 @@
+{% load staticfiles %}
+<html lang="en" ng-app="try">
+<head>
+	<base href="/">
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LCB1 - Equipment Rental System</title>
+    <!-- Latest compiled and minified CSS -->
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   
+
+    <!-- <script src='./js/angular.min.js' ></script> -->
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js'></script>
+    <script src="https://fastcdn.org/FileSaver.js/1.1.20151003/FileSaver.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.1.3/ui-bootstrap-tpls.min.js'></script>
+
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-image-spinner/0.1.5/angular-image-spinner.js'></script> -->
+
+<!--     <script src='{% static "js/app/utils/try-nav/try-nav.module.js" %}' ></script>
+    <script src='{% static "js/app/utils/try-nav/try-nav.directive.js" %}' ></script>
+
+
+    <script src='{% static "js/app/core/family/family.module.js" %}' ></script>
+    <script src='{% static "js/app/core/family/family.service.js" %}' ></script>
+    <script src='{% static "js/app/core/station/station.module.js" %}' ></script>
+    <script src='{% static "js/app/core/station/station.service.js" %}' ></script>
+    <script src='{% static "js/app/core/parameter/parameter.module.js" %}' ></script>
+    <script src='{% static "js/app/core/parameter/parameter.service.js" %}' ></script>
+    <script src='{% static "js/app/core/tester/tester.module.js" %}' ></script>
+    <script src='{% static "js/app/core/tester/tester.service.js" %}' ></script>
+    <script src='{% static "js/app/core/export/export.module.js" %}' ></script>
+    <script src='{% static "js/app/core/export/export.service.js" %}' ></script>
+
+
+    <script src='{% static "js/app/core/interceptors/interceptors.module.js" %}' ></script>
+    <script src='{% static "js/app/core/interceptors/login-required.service.js" %}' ></script>
+
+    <script src='{% static "js/app/model-list/model-list.module.js" %}' ></script>
+    <script src='{% static "js/app/model-list/model-list.component.js" %}' ></script>
+    <script src='{% static "js/app/parameter-detail/parameter-detail.module.js" %}' ></script>
+    <script src='{% static "js/app/parameter-detail/parameter-detail.component.js" %}' ></script>
+
+    <script src='{% static "js/app/spc-station-list/spc-station-list.module.js" %}' ></script>
+    <script src='{% static "js/app/spc-station-list/spc-station-list.component.js" %}' ></script>
+    <script src='{% static "js/app/spc-station-detail/spc-station-detail.module.js" %}' ></script>
+    <script src='{% static "js/app/spc-station-detail/spc-station-detail.component.js" %}' ></script>
+    <script src='{% static "js/app/spc-tester-detail/spc-tester-detail.module.js" %}' ></script>
+    <script src='{% static "js/app/spc-tester-detail/spc-tester-detail.component.js" %}' ></script>
+    <script src='{% static "js/app/spc-parameter-detail/spc-parameter-detail.module.js" %}' ></script>
+    <script src='{% static "js/app/spc-parameter-detail/spc-parameter-detail.component.js" %}' ></script> -->
+
+    <script src='{% static "js/app/app.module.js" %}' ></script>
+    <script src='{% static "js/app/app.config.js" %}' ></script>
+
+    
+    
+  
+
+</head>
+	
+ <body>
+ <div ng-controller="Controller">
+ 	<try-nav></try-nav>
+    </div>
+
+ 	{% block content %}{% endblock content %}
+
+    
+    {% block extra_javascript %}{% endblock extra_javascript %}
+ </body>
+ </html>

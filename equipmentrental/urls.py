@@ -17,10 +17,18 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
 
+from django.views.generic.base import TemplateView
+from angular.views import AngularTemplateView
+
 urlpatterns = [
-	url(r'^', admin.site.urls),
+	# url(r'^', admin.site.urls),
     url(r'^admin/', admin.site.urls),
     url(r'^report/', include('rental.urls')),
+    url(r'^api/templates/(?P<item>[A-Za-z0-9\_\-\.\/]+)\.html$',  AngularTemplateView.as_view()),
+]
+
+urlpatterns +=  [
+    url(r'^', TemplateView.as_view(template_name='angular/home.html'))
 ]
 
 admin.site.site_header = 'Equipment Rental System'
