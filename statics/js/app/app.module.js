@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('try', [
+angular.module('rental', [
     // external
     // 'angularUtils.directives.dirPagination',
     'ngCookies',
@@ -24,11 +24,11 @@ angular.module('try', [
     // 'export',
 
     //Internal
-    // 'modelList',
+    'rentalList',
     // 'parameterDetail',
     // 'spcStationList',
     // 'spcStationDetail',
     // 'spcTesterDetail',
     // 'spcParameterDetail',
-    'tryNav',
+    // 'tryNav',
 ]);
