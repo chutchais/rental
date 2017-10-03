@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.text import slugify
+from django.db.models.signals import pre_save
 from django.core.exceptions import ValidationError
 
 LCB1 = 'LCB1'
@@ -70,6 +72,7 @@ class Rental(models.Model):
 		verbose_name ='For Vessel')
 	# rent_from = models.CharField(verbose_name ='Rent from',max_length=10 ,choices=COMPANY_CHOICES)
 	requested_by = models.CharField(verbose_name ='Requested By',max_length=10 ,choices=COMPANY_CHOICES,blank=True, null=True)
+	slug = models.SlugField(unique=True,blank=True, null=True)
 	description = models.CharField(max_length=255,blank=True, null=True)
 	start_date = models.DateTimeField(blank=True, null=True)
 	stop_date  = models.DateTimeField(blank=True, null=True)
@@ -88,8 +91,38 @@ class Rental(models.Model):
 	def total_machine(self):
 		return self.machine.all().count()
 
+	def total_time(self):
+		duration = self.stop_date- self.start_date
+		days, seconds = duration.days, duration.seconds
+		hours = days * 24 + seconds // 3600
+		minutes = (seconds % 3600) // 60
+		seconds = (seconds % 60)
+		return '{}:{} hours'.format(hours,minutes)
+
+	@property
+	def purpose_name(self):
+		return self.purpose.name
+
 	class Meta:
-		ordering = ['-created_date']
+		ordering = ['-start_date']
+
+
+
+def create_rental_slug(instance, new_slug=None):
+    slug = slugify(instance.name)
+    if new_slug is not None:
+        slug = new_slug
+    qs = Rental.objects.filter(slug=slug).order_by("-id")
+    exists = qs.exists()
+    if exists:
+        new_slug = "%s-%s" %(slug, qs.count())
+        return create_rental_slug(instance, new_slug=new_slug)
+    return slug
+
+def pre_save_rental_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = create_rental_slug(instance)
+pre_save.connect(pre_save_rental_receiver, sender=Rental)
 
 # class RentalDetail(models.Model):
 # 	machine = models.ManyToManyField(Machine,related_name="machines") #models.ForeignKey('Machine', related_name='rentals')

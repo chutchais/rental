@@ -86,16 +86,16 @@ admin.site.register(Vessel,VesselAdmin)
 class RentalAdmin(admin.ModelAdmin):
     search_fields = ['name','description']
     list_filter = ['requested_by','purpose','approved','created_date']
-    list_display = ('name','requested_by','purpose','description','total_machine','created_date','approved')
+    list_display = ('name','slug','requested_by','purpose','description','total_machine','created_date','approved')
     fieldsets = [
-        ('General Information',               {'fields': ['name',('description'),'user','created_date']}),
+        ('General Information',               {'fields': ['name',('description'),'user','slug','created_date']}),
         ('Rental Details',               {'fields': ['requested_by','purpose','vessel','start_date','stop_date']}),
         ('Machine Details',               {'fields': ['machine',]}),
         ('Approval Details',               {'fields': ['approved','approved_date','approved_by']}),
     ]
     # inlines = [RentalDetailline]
     filter_horizontal = ('machine',)
-    readonly_fields =['user','created_date']
+    readonly_fields =['user','created_date','slug']
 
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
         field = super(RentalAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)

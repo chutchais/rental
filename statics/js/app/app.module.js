@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('rental', [
+angular.module('rentalsystem', [
     // external
     // 'angularUtils.directives.dirPagination',
     'ngCookies',
@@ -9,6 +9,8 @@ angular.module('rental', [
     // 'ngFileSaver',
     // 'ngSanitize',
     // 'ng-showdown',
+    // 'ngAnimate',
+    // 'ngSanitize',
     // 'ui.bootstrap',
     // // internal
     // 'blogDetail',
@@ -22,6 +24,7 @@ angular.module('rental', [
     // 'family',
     // 'parameter',
     // 'export',
+    'rental',
 
     //Internal
     'rentalList',

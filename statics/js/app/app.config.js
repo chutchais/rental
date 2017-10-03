@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('rental').
+angular.module('rentalsystem').
     config(
         function(
           $locationProvider,
@@ -20,11 +20,12 @@ angular.module('rental').
                 // template: "<model-list></model-list>"
                 // templateUrl: "/api/templates/about.html"
                 // console.log('home')
+                 template: "<rental-list></rental-list>"
               }).
-              when("/rental", {
-                // console.log('rental')
-                template: "<rental-list></rental-list>"
-              }).
+              // when("/rental", {
+              //   // console.log('rental')
+              //   template: "<rental-list></rental-list>"
+              // }).
               otherwise({
                   template: "Not Found"
               })

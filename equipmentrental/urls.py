@@ -24,6 +24,7 @@ urlpatterns = [
 	# url(r'^', admin.site.urls),
     url(r'^admin/', admin.site.urls),
     url(r'^report/', include('rental.urls')),
+    url(r'^api/rental/$',include("rental.api.urls", namespace='rental-api')),
     url(r'^api/templates/(?P<item>[A-Za-z0-9\_\-\.\/]+)\.html$',  AngularTemplateView.as_view()),
 ]
 

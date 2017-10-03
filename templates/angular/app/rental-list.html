@@ -1,3 +1,46 @@
-<h1>Hi Rental</h1>
-    Name: <input ng-model="name">
-    <h1>You entered: {{name}}</h1>
+<h1>{{ range }}</h1>
+
+<div class="col-lg-6">
+    <div class="input-group">
+      <input ng-model="txtsearch" type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button">Go!</button>
+      </span>
+    </div>
+  </div>
+</div>
+</br>
+<!-- Serch Text : {{ txtsearch }} -->
+{{ result }}
+
+  <table class="table">
+    <thead class="thead-default">
+      <tr>
+        <th>Name</th>
+        <th>Requested By</th>
+        <th>Purpose</th>
+        <th>Start</th>
+        <th>Stop</th>
+        <th>Rent time</th>
+        <th>Total</th>
+        <th>Equipment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat='rental in rentals'>
+        <td>{{ rental.name }}</td>
+        <td>{{ rental.requested_by }}</td>
+        <td>{{ rental.purpose_name }}</td>
+        <td>{{ rental.start_date| date:'MMM d H:mm'}} </td>
+        <td>{{ rental.stop_date | date:'MMM d H:mm'}}</td>
+       
+        <td>{{ rental.total_time }}</td>
+         <td>{{ rental.total_machine }}</td>
+        <td><li ng-repeat='x in rental.machine'>{{x}}</li></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
